@@ -1,0 +1,145 @@
+swagger: "2.0"
+info:
+  description: "API para cadastro e consulta de dados. Aplicação realiza as 4 oerações basicas com os dados informados"
+  version: "1.0.0"
+  title: "API-Operacoes-Basicas"
+  contact:
+    email: "dev.lhdsantos@gmail.com"
+host: "heroku"
+basePath: "/v1"
+tags:
+- name: "Realizar contas"
+  description: ""
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+schemes:
+- "http"
+paths:
+  /operacoes:
+    post:
+      tags:
+      - "Realizar contas"
+      summary: "Realizar as 4 operações basicas"
+      description: "Endpoint responsavel por receber 2 números para realizar as 4 operações básicas"
+      operationId: "postNumeros"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Números para realizar as operações"
+        required: true
+        schema:
+          $ref: "#/definitions/ApiRequest"
+      responses:
+        "201":
+          description: "Created"
+        "400":
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/ResponseError"
+        "404":
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/ResponseError"
+      security:
+      - petstore_auth:
+        - "write:pets"
+        - "read:pets"
+    get:
+      tags:
+      - "Realizar contas"
+      summary: "Retorna os resultados"
+      description: "Endpoint responsavel por retornar os valores calculados"
+      operationId: "getResultados"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "query"
+          name: "offset"
+          type: "integer"
+          description: "The number of items to skip before starting to collect the result set"
+        - in: "query"
+          name: "limit"
+          type: "integer"
+          description: "The numbers of items to return"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "204":
+          description: "No content"
+        "400":
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/ResponseError"
+        "404":
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/ResponseError"
+      security:
+      - petstore_auth:
+        - "write:pets"
+        - "read:pets"
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  ApiResponse:
+    type: "object"
+    properties:
+      firstNumber:
+        type: "integer"
+        format: "int32"
+      secondNumber:
+        type: "integer"
+        format: "int32"
+      operation:
+        $ref: "#/definitions/Operation"
+  ApiRequest:
+    type: "object"
+    properties:
+      firstNumber:
+        type: "integer"
+        format: "int32"
+      secondNumber:
+        type: "integer"
+        format: "int32"
+  Operation:
+    type: "object"
+    properties:
+      sum:
+        type: "integer"
+        format: "int32"
+      subtract:
+        type: "integer"
+        format: "int32"
+      division:
+        type: "integer"
+        format: "int32"
+      multiply:
+        type: "integer"
+        format: "int32"
+  ResponseError:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+      message:
+        type: "string"
+        
