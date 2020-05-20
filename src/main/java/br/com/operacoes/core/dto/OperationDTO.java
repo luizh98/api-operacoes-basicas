@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class OperationDTO {
 
-  private Integer sum = null;
-  private Integer subtract = null;
-  private Integer division = null;
-  private Integer multiply = null;
+  private Double sum = null;
+  private Double subtract = null;
+  private Double division = null;
+  private Double multiply = null;
 
 }
 

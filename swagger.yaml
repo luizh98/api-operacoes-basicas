@@ -104,37 +104,37 @@ definitions:
     type: "object"
     properties:
       firstNumber:
-        type: "integer"
-        format: "int32"
+        type: "number"
+        format: "double"
       secondNumber:
-        type: "integer"
-        format: "int32"
+        type: "number"
+        format: "double"
       operation:
         $ref: "#/definitions/Operation"
   ApiRequest:
     type: "object"
     properties:
       firstNumber:
-        type: "integer"
-        format: "int32"
+        type: "number"
+        format: "double"
       secondNumber:
-        type: "integer"
-        format: "int32"
+        type: "number"
+        format: "double"
   Operation:
     type: "object"
     properties:
       sum:
-        type: "integer"
-        format: "int32"
+        type: "number"
+        format: "double"
       subtract:
-        type: "integer"
-        format: "int32"
+        type: "number"
+        format: "double"
       division:
-        type: "integer"
-        format: "int32"
+        type: "number"
+        format: "double"
       multiply:
-        type: "integer"
-        format: "int32"
+        type: "number"
+        format: "double"
   ResponseError:
     type: "object"
     properties:

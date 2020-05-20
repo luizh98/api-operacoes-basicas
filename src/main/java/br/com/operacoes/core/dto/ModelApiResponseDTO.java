@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ModelApiResponseDTO {
 
-  private Integer firstNumber;
-  private Integer secondNumber;
+  private Double firstNumber;
+  private Double secondNumber;
   private OperationDTO operation;
 
 }
