@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ModelApiResponseDTO {
+public class ApiResponseDTO {
 
   private Double firstNumber;
   private Double secondNumber;

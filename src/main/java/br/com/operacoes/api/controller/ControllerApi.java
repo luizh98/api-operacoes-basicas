@@ -10,28 +10,22 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.operacoes.core.dto.ApiRequestDTO;
-import br.com.operacoes.core.dto.ModelApiResponseDTO;
+import br.com.operacoes.core.dto.ApiResponseDTO;
 import br.com.operacoes.core.dto.OperationDTO;
+import br.com.operacoes.service.OperationService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor(onConstructor_={@Autowired})
 public class ControllerApi {
 
+    private final OperationService operationService;
+
     @RequestMapping(value = "/operacoes", method = RequestMethod.POST)
     public ResponseEntity operacoes(@RequestBody ApiRequestDTO apiRequestDTO) {
-        ModelAndView model = new ModelAndView();
+        
+        operationService.realizaCalculo(apiRequestDTO.getFirstNumber(), apiRequestDTO.getSecondNumber());
 
-        double sum = apiRequestDTO.getFirstNumber() + apiRequestDTO.getSecondNumber();
-        double sub = apiRequestDTO.getFirstNumber() - apiRequestDTO.getSecondNumber();
-        double multi = apiRequestDTO.getFirstNumber() * apiRequestDTO.getSecondNumber();
-        double div = apiRequestDTO.getFirstNumber() / apiRequestDTO.getSecondNumber();
-
-        OperationDTO operationDTO = OperationDTO.builder().sum(sum).subtract(sub).multiply(multi).division(div).build();
-        ModelApiResponseDTO modelResponse = ModelApiResponseDTO.builder().firstNumber(apiRequestDTO.getFirstNumber())
-                .secondNumber(apiRequestDTO.getSecondNumber()).operation(operationDTO).build();
-
-        model.addObject("ApiResponse", modelResponse);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("");
     }
