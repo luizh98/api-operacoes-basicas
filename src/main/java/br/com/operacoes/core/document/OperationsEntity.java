@@ -1,6 +1,5 @@
 package br.com.operacoes.core.document;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -12,12 +11,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document(collection = "operation")
-public class OperationEntity {
+@Document(collection = "operations")
+public class OperationsEntity {
 
-    @Id
-    private String id;
-    private Double firstNumber;
-    private Double secondNumber;
-    private OperationsEntity operations;
+  private Double sum = null;
+  private Double subtract = null;
+  private Double division = null;
+  private Double multiply = null;
+
 }
+
