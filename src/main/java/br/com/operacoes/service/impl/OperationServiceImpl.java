@@ -1,11 +1,17 @@
 package br.com.operacoes.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import br.com.operacoes.core.document.OperationEntity;
 import br.com.operacoes.core.document.OperationsEntity;
 import br.com.operacoes.core.dto.OperationDTO;
+import br.com.operacoes.core.dto.OperationsDTO;
 import br.com.operacoes.core.repository.OperationRepository;
 import br.com.operacoes.service.OperationService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +21,25 @@ import lombok.RequiredArgsConstructor;
 public class OperationServiceImpl implements OperationService {
 
     private final OperationRepository operationRepository;
+
+    @Override
+    public List<OperationDTO> retrieveOperations(PageRequest page) {
+        Page<OperationEntity> pagedResults = operationRepository.findAll(page);
+
+        List<OperationDTO> operationList = pagedResults.stream().map(op -> OperationDTO.builder()
+        .firstNumber(op.getFirstNumber())
+        .secondNumber(op.getSecondNumber())
+        .operations(OperationsDTO.builder()
+            .division(op.getOperations().getDivision())
+            .multiply(op.getOperations().getMultiply())
+            .subtract(op.getOperations().getSubtract())
+            .sum(op.getOperations().getSum())
+            .build())
+        .build())
+        .collect(Collectors.toList());
+
+        return operationList;
+    }
 
     @Override
     public void realizaCalculo(double numberOne, double numberTwo) {
