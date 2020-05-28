@@ -1,6 +1,7 @@
 package br.com.operacoes.core.document;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,10 +15,14 @@ import lombok.NoArgsConstructor;
 @Document(collection = "operations")
 public class OperationsEntity {
 
-  private Double sum = null;
-  private Double subtract = null;
-  private Double division = null;
-  private Double multiply = null;
+  @Field(name = "sum")
+  private Double sum;
+  @Field(name = "subtract")
+  private Double subtract;
+  @Field(name = "division")
+  private Double division;
+  @Field(name = "multiply")
+  private Double multiply;
 
 }
 
